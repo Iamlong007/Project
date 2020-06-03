@@ -6,9 +6,9 @@
     <span class="regName"> {{ reg.name }} </span>
     <Icon name="clock" :width="20" :height="20" class="userIcon" />
     <span class="time"> {{ reg.time }} </span>
-    <Icon name="calendar" :width="20" :height="20" class="userIcon" /><span>{{
-      reg.date
-    }}</span
+    <Icon name="calendar" :width="20" :height="20" class="userIcon" /><span
+      class="regDate"
+      >{{ reg.date }}</span
     ><Icon name="users" :width="20" :height="20" class="userIcon" /><span
       class="staff"
     >

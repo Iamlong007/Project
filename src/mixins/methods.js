@@ -17,11 +17,12 @@ export default {
       const formatted = hours + ":" + minutes + ":" + seconds + format;
       const today = new Date();
       const newDate =
-        today.getFullYear() +
+        today.getDate() +
         "/" +
         (today.getMonth() + 1) +
         "/" +
-        today.getDate();
+        today.getFullYear();
+
       this.liveTime = formatted + " " + "-" + " " + newDate;
     }
   }
