@@ -130,7 +130,6 @@ export default {
   components: {
     Icon
   },
-  props: true,
   data() {
     return {
       name: "",
@@ -170,7 +169,8 @@ export default {
         this.userId = "J" + num;
       }
       return num;
-    }
+    },
+    submit() {}
   }
 };
 </script>

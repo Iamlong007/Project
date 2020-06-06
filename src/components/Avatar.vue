@@ -18,7 +18,7 @@ export default {
       default: 24
     },
     img: {
-      type: [File],
+      type: String,
       default: require("../assets/avatar.png")
     }
   },

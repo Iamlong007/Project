@@ -19,7 +19,7 @@
         </div>
         <div id="addStaff">
           <button
-            @click="showComponent('staff')((activeBt2 = !activeBt2))"
+            @click="showComponent('staff')"
             :class="activeBt2 ? 'addStaffBtActive' : 'addStaffBt '"
           >
             {{ addStaff }}
@@ -33,7 +33,7 @@
         </div>
         <div id="addPatient">
           <button
-            @click="showComponent('patient')((activeBt = !activeBt))"
+            @click="showComponent('patient')"
             :class="activeBt ? 'addPatientBtActive' : 'addPatientBt'"
           >
             {{ addPatient }}
@@ -137,6 +137,20 @@ export default {
         }
       ]
     };
+  },
+  watch: {
+    activeForm(newVal) {
+      if (newVal === AddStaff) {
+        this.activeBt = false;
+        this.activeBt2 = true;
+      } else if (newVal === AddPatient) {
+        this.activeBt = true;
+        this.activeBt2 = false;
+      } else {
+        this.activeBt = false;
+        this.activeBt2 = false;
+      }
+    }
   },
   created() {
     setInterval(this.getNow, 1000);
