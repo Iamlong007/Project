@@ -91,7 +91,7 @@
           </button>
         </span>
 
-        <button id="staffSubmit" @click="snackbar = true">
+        <button id="staffSubmit" @click="(snackbar = true), submit()">
           Submit
           <Icon name="send" :width="14" :height="14" class="sendIcon"></Icon>
         </button>
