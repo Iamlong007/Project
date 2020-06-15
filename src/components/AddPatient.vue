@@ -109,8 +109,8 @@
 
 <script>
 import forms from "@/mixins/forms";
-
 import Icon from "@/components/Icon.vue";
+// import firebase from "firebase";
 export default {
   name: "AddPatient",
   mixins: [forms],

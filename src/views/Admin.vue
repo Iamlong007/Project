@@ -47,7 +47,7 @@
         </div>
       </div>
       <transition name="fade">
-        <component :is="activeForm"></component>
+        <component :is="activeForm" :hide-form="showComponent"></component>
       </transition>
       <div class="adminTopSect">
         <Avatar :src="img" class="avatarAdmin" :width="120" :height="120" />
@@ -81,7 +81,6 @@
 <script>
 import forms from "@/mixins/forms";
 import methods from "@/mixins/methods";
-
 import Icon from "@/components/Icon.vue";
 import AddStaff from "@/components/AddStaff.vue";
 import AddPatient from "@/components/AddPatient.vue";

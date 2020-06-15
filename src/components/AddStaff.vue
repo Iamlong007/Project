@@ -91,7 +91,7 @@
           </button>
         </span>
 
-        <button type="submit" id="staffSubmit" @click="submit">
+        <button id="staffSubmit" @click="submit()">
           Submit
           <Icon name="send" :width="14" :height="14" class="sendIcon"></Icon>
         </button>
@@ -123,10 +123,18 @@
 
 <script>
 import forms from "@/mixins/forms";
+import methods from "@/mixins/methods";
 import Icon from "@/components/Icon.vue";
+import firebase from "firebase";
 export default {
   name: "AddStaff",
-  mixins: [forms],
+  mixins: [forms, methods],
+  props: {
+    hideForm: {
+      type: Function,
+      default: () => {}
+    }
+  },
   components: {
     Icon
   },
@@ -137,6 +145,7 @@ export default {
       address: "",
       userId: "",
       password: "",
+      activeForm: null,
       showPassword: false,
       uploads: [
         {
@@ -170,7 +179,34 @@ export default {
       }
       return num;
     },
-    submit() {}
+    submit() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(
+          `${this.userId}@admin.com`,
+          this.password
+        )
+        .then(user => {
+          let uid = user.user.uid;
+          //   let image;
+          //  let imageUpload =  firebase.storage().ref(`/images/${imageNsme}`).put().then(val => image = val.downloadURL)
+          //  (imageUpload.snapshot.bytesTransferred/imageUpload.snapshot.totalBytes)*100
+
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(uid)
+            .set({ name: this.name, age: this.age, address: this.address });
+        })
+        .catch(e => {
+          console.log(e.message);
+        });
+      // auth
+      //   .signInWithEmailAndPassword(`${this.userId}@admin.com`, this.password)
+      //   .then((user) => {
+      //     console.log(user);
+      //   });
+    }
   }
 };
 </script>
