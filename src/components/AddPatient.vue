@@ -77,10 +77,20 @@
           ></label>
           <img :src="docUpload.image" class="docCont" v-if="docVisibility" />
         </div>
-        <button type="submit" id="patientSubmit">
+        <button
+          type="submit"
+          id="patientSubmit"
+          @click="(snackbar = true), submit()"
+        >
           Submit
           <Icon name="send" :width="14" :height="14" class="sendIcon"></Icon>
         </button>
+
+        <div class="text-center">
+          <v-snackbar color="success" v-model="snackbar" :timeout="timeout">
+            {{ text }}
+          </v-snackbar>
+        </div>
       </form>
     </div>
     <div class="imgDiv" v-for="upload in uploads" :key="upload.id">
@@ -110,7 +120,7 @@
 <script>
 import forms from "@/mixins/forms";
 import Icon from "@/components/Icon.vue";
-// import firebase from "firebase";
+import firebase from "firebase";
 export default {
   name: "AddPatient",
   mixins: [forms],
@@ -138,7 +148,10 @@ export default {
           image: false,
           id: 1
         }
-      ]
+      ],
+      snackbar: false,
+      text: "Data Saved",
+      timeout: 2000
     };
   },
   methods: {
@@ -167,7 +180,24 @@ export default {
         docUpload.image = e.target.result;
       };
       reader.readAsDataURL(file);
+    },
+    submit() {
+      firebase
+        .firestore()
+        .collection("patients")
+        .doc()
+        .set({
+          name: this.name,
+          age: this.age,
+          address: this.address
+        });
     }
+
+    // auth
+    //   .signInWithEmailAndPassword(`${this.userId}@admin.com`, this.password)
+    //   .then((user) => {
+    //     console.log(user);
+    //   });
   }
 };
 </script>

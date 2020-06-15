@@ -39,7 +39,7 @@
         </span>
         <span class="Role"
           ><Icon name="tag" :width="18" :height="18" class="formIcon"></Icon
-          ><select id="selectRole">
+          ><select id="selectRole" v-model="role">
             <option value="" disabled selected hidden class="option"
               >Select Role</option
             >
@@ -91,10 +91,15 @@
           </button>
         </span>
 
-        <button id="staffSubmit" @click="submit()">
+        <button id="staffSubmit" @click="snackbar = true">
           Submit
           <Icon name="send" :width="14" :height="14" class="sendIcon"></Icon>
         </button>
+        <div class="text-center">
+          <v-snackbar color="success" v-model="snackbar" :timeout="timeout">
+            {{ text }}
+          </v-snackbar>
+        </div>
       </form>
     </div>
     <div class="imgDiv" v-for="upload in uploads" :key="upload.id">
@@ -144,6 +149,7 @@ export default {
       age: "",
       address: "",
       userId: "",
+      role: "",
       password: "",
       activeForm: null,
       showPassword: false,
@@ -152,7 +158,11 @@ export default {
           image: false,
           id: 1
         }
-      ]
+      ],
+      snackbar: false,
+
+      text: "Data Saved",
+      timeout: 2000
     };
   },
   methods: {
@@ -196,7 +206,12 @@ export default {
             .firestore()
             .collection("users")
             .doc(uid)
-            .set({ name: this.name, age: this.age, address: this.address });
+            .set({
+              name: this.name,
+              age: this.age,
+              address: this.address,
+              role: this.role
+            });
         })
         .catch(e => {
           console.log(e.message);
