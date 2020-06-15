@@ -153,6 +153,7 @@ export default {
       password: "",
       activeForm: null,
       showPassword: false,
+      image: false,
       uploads: [
         {
           image: false,
