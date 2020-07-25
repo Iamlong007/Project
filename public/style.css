@@ -4,6 +4,12 @@ body {
   border-radius: 15px;
 }
 
+.tester {
+  background-image: url(../public/loginBg.jpg);
+  display: block;
+  background-size: 50%;
+}
+
 .topSect {
   width: 100%;
   height: 70px;
@@ -149,7 +155,7 @@ body {
 .adminScr {
   display: block;
   width: 80%;
-  height: 30em;
+  height: max-content;
   margin-top: 2%;
   margin-left: 10%;
   margin-right: 10%;

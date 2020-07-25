@@ -95,9 +95,18 @@
           Submit
           <Icon name="send" :width="14" :height="14" class="sendIcon"></Icon>
         </button>
-        <div class="text-center">
-          <v-snackbar color="success" v-model="snackbar" :timeout="timeout">
-            {{ text }}
+        <div>
+          <v-snackbar
+            color="success"
+            class="snackbar"
+            v-model="snackbar"
+            :timeout="timeout"
+          >
+            Successfully Registered<Icon
+              name="check"
+              :width="20"
+              :height="20"
+            ></Icon>
           </v-snackbar>
         </div>
       </form>
@@ -227,4 +236,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.snack {
+  width: 50px;
+  margin: auto;
+}
+</style>
